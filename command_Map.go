@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func commandMap(cfg *config) error {
+func commandMap(_ string, cfg *config) error {
 	var pkm pokeMap
 	var Url string
 	Url = "https://pokeapi.co/api/v2/location-area"

@@ -35,17 +35,26 @@ func startRepl(cfg *config) {
 		}
 
 		commandName := cleanS[0]
+		reste := strings.Join(cleanS[1:], " ")
+
+		if len(reste) == 0 {
+			fmt.Println("Type something else")
+			continue
+		}
 		command, exists := cfg.commands[commandName]
+
 		if exists {
-			err := command.callback(cfg)
+			err := command.callback(reste, cfg)
 			if err != nil {
 				fmt.Println(err)
 			}
 			continue
+
 		} else {
 			fmt.Println("Unknown command")
 			continue
 		}
+
 	}
 }
 
@@ -59,7 +68,7 @@ func cleanInput(text string) []string {
 	return cleanWorld
 }
 
-func commandExit(cfg *config) error {
+func commandExit(_ string, cfg *config) error {
 	fmt.Println("Closing the Pokedex... Goodbye!")
 	os.Exit(0)
 	return nil
@@ -68,7 +77,7 @@ func commandExit(cfg *config) error {
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config) error
+	callback    func(string, *config) error
 }
 
 func commands() map[string]cliCommand {
@@ -87,6 +96,11 @@ func commands() map[string]cliCommand {
 			name:        "map",
 			description: "Display the map",
 			callback:    commandMap,
+		},
+		"explore": {
+			name:        "explore",
+			description: "explore each location",
+			callback:    commandExplore,
 		},
 	}
 }

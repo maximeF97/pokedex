@@ -34,7 +34,7 @@ func commandExplore(area string, cfg *config) error {
 		cfg.cache.Add(Url, body)
 	}
 	for _, pkm := range location.PokemonEncounters {
-		fmt.Printf(" - %v \n", pkm.Pokemon.Name)
+		fmt.Printf("- %v \n", pkm.Pokemon.Name)
 
 	}
 	return nil
