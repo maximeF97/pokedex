@@ -15,6 +15,7 @@ func main() {
 	cfg := &config{
 		commands: commandsMap,
 		cache:    pokecache.NewCache(5 * time.Second),
+		pokedex:  map[string]pokemon{},
 	}
 
 	startRepl(cfg)
@@ -101,6 +102,11 @@ func commands() map[string]cliCommand {
 			name:        "explore",
 			description: "explore each location",
 			callback:    commandExplore,
+		},
+		"catch": {
+			name:        "catch",
+			description: "Catch pokemons!",
+			callback:    commandCatch,
 		},
 	}
 }
