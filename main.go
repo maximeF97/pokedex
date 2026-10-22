@@ -37,11 +37,6 @@ func startRepl(cfg *config) {
 
 		commandName := cleanS[0]
 		reste := strings.Join(cleanS[1:], " ")
-
-		if len(reste) == 0 {
-			fmt.Println("Type something else")
-			continue
-		}
 		command, exists := cfg.commands[commandName]
 
 		if exists {
@@ -112,6 +107,11 @@ func commands() map[string]cliCommand {
 			name:        "inspect",
 			description: "look at you pokemon stats",
 			callback:    commandInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "inspect the pokemon you've catch !",
+			callback:    commandPokedex,
 		},
 	}
 }
